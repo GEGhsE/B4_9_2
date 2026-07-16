@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<!-- © 2026 GEG 화성(깊이 e끌림) · 김수경 -->
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>4학년 영어 표현 여행 💬</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#FFF9F0;--card:#fff;--apricot:#F6B17A;--apricot-soft:#FFE9D6;--sage:#7FB069;--sage-soft:#E6F0DD;--sky:#8FC1DA;--sky-soft:#E2F0F6;--amber:#E8A33D;--ink:#5A4632;--ink-soft:#9A8A77;--line:#F0E4D4;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);font-family:'Jua','Noto Sans KR',sans-serif;color:var(--ink)}
+button{font-family:inherit;cursor:pointer;border:none}
+[onclick]{cursor:pointer;user-select:none}
+.en{letter-spacing:.5px}
+#fit{position:fixed;inset:0;overflow:hidden;background:var(--cream);display:flex;justify-content:center}
+#stage{width:100%;max-width:1280px;height:100%;background:var(--cream);display:flex;flex-direction:column;overflow:hidden;user-select:none}
+input,textarea{user-select:text}
+.top{display:flex;align-items:center;justify-content:space-between;padding:9px 26px;background:#fff;border-bottom:3px solid var(--apricot-soft);flex-shrink:0}
+.brand{font-size:22px;display:flex;gap:6px;align-items:center}
+.top-r{display:flex;gap:10px;align-items:center}
+.who{font-size:24px;color:var(--ink-soft)}
+.seeds{background:#FFF3E2;border:3px solid var(--apricot);border-radius:99px;padding:8px 22px;font-size:25px;color:var(--amber)}
+.prog{display:flex;gap:6px;padding:8px 26px;background:#fff;border-bottom:2px solid var(--line);flex-shrink:0}
+.dot{flex:1;height:10px;border-radius:99px;background:var(--line)}
+.dot.on{background:var(--sage)}.dot.cur{background:var(--apricot)}
+main{flex:1;overflow:hidden;padding:16px 34px;display:flex;flex-direction:column}
+.sbody{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:12px;justify-content:flex-start}
+.h1{font-size:30px;margin-bottom:5px}
+.sub{font-size:26px;color:var(--ink-soft)}
+.goal{background:var(--sage-soft);border-left:8px solid var(--sage);border-radius:0 14px 14px 0;padding:12px 20px;font-size:24px}
+.center{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.btn{background:var(--sage);color:#fff;border-radius:99px;padding:13px 30px;font-size:26px}
+.btn.soft{background:var(--apricot-soft);color:var(--amber)}
+.btn.sky{background:var(--sky);color:#fff}
+.nav{display:flex;justify-content:space-between;gap:12px;flex-shrink:0;padding-top:12px}
+.nav .btn{font-size:23px;padding:11px 26px}
+.warrow{background:var(--apricot-soft);color:var(--amber);border-radius:99px;width:62px;height:62px;font-size:28px;flex-shrink:0}
+.wnav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+.count{font-size:22px;color:var(--ink-soft)}
+.select{font-family:inherit;font-size:34px;padding:16px 26px;border:3px solid var(--line);border-radius:18px;background:#fff;color:var(--ink);min-width:320px;text-align:center;cursor:pointer}
+.unitgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+.unit{background:#fff;border:3px solid var(--line);border-radius:16px;padding:14px 8px;font-size:22px;text-align:center}
+.unit.sel{border-color:var(--sage);background:var(--sage-soft)}
+/* big card */
+.big{background:#fff;border:4px solid var(--apricot);border-radius:26px;width:680px;max-width:94%;padding:22px;text-align:center}
+.fn{font-size:22px;color:var(--apricot)}
+.frame{font-size:30px;margin:4px 0}
+.ex{font-size:24px}
+.exko{font-size:22px;color:var(--ink-soft);margin-top:4px}
+/* chip builder */
+.bcard{background:#fff;border:3px solid var(--line);border-radius:20px;width:760px;max-width:96%;padding:18px}
+.prompt{font-size:24px;margin-bottom:10px}
+.slot{min-height:70px;border:3px dashed var(--apricot);border-radius:16px;padding:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:#FFFDF8}
+.bank{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;justify-content:center}
+.chip{background:var(--sky-soft);color:var(--ink);border:3px solid var(--sky);border-radius:14px;padding:10px 18px;font-size:26px}
+.chip.placed{background:var(--apricot-soft);border-color:var(--apricot);color:var(--amber)}
+.result{margin-top:8px;font-size:23px;min-height:26px}
+.result.good{color:var(--sage)}.result.again{color:var(--amber)}
+/* write card */
+.writecard{background:#fff;border:3px solid var(--line);border-radius:20px;padding:14px 24px;text-align:center;max-width:680px;margin:0 auto;flex-shrink:0}
+.writecard .ex{font-size:36px}
+.writecard .exko{font-size:24px}
+.writebtns{display:flex;gap:12px;justify-content:center;margin-top:8px;flex-shrink:0}
+.treewrap{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%}
+.wdone{color:var(--sage);font-size:22px;margin-top:6px}
+/* garden */
+.garden{position:relative;width:260px;height:120px;margin:0 auto 2px}
+.gardenSvg{width:100%;height:100%;display:block}
+.flowers{position:absolute;inset:0;pointer-events:none}
+.flower{position:absolute;font-size:30px;transform:translate(-50%,-50%)}
+.flower.pop{animation:fpop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes fpop{0%{transform:translate(-50%,-50%) scale(0)}60%{transform:translate(-50%,-50%) scale(1.4)}100%{transform:translate(-50%,-50%) scale(1)}}
+.gcount{text-align:center;font-size:24px;color:var(--sage);margin-bottom:6px}
+/* record */
+.kbd{font-family:inherit;font-size:26px;padding:12px;border:3px solid var(--line);border-radius:14px;width:560px;max-width:92%;color:var(--ink)}
+.recnote{font-size:24px;color:var(--ink-soft)}
+.rec{animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+/* reflect */
+.stars{display:flex;gap:14px;font-size:66px}
+.star{cursor:pointer;color:var(--line)}.star.on{color:var(--amber)}
+.qbox{background:#fff;border:3px solid var(--line);border-radius:18px;padding:18px;width:680px;max-width:94%}
+.qbox p{font-size:25px;margin-bottom:10px}
+.qbox textarea{width:100%;border:3px solid var(--line);border-radius:14px;padding:12px;font-family:inherit;font-size:24px;resize:none;height:84px;color:var(--ink)}
+.treebig{font-size:84px}
+.tree{font-size:30px;color:var(--sage);text-align:center;line-height:1.4}
+/* toast / overlay */
+.burst{position:fixed;font-size:40px;z-index:70;pointer-events:none;animation:burst 1.4s ease-out forwards}
+@keyframes burst{0%{transform:translateY(0) scale(.4);opacity:0}20%{opacity:1}100%{transform:translateY(-130px) scale(1.2) rotate(18deg);opacity:0}}
+
+.spk{background:var(--sky-soft);color:var(--sky);border-radius:50%;width:50px;height:50px;font-size:24px}
+.buddy{display:flex;gap:10px;align-items:flex-start;flex-shrink:0;margin-bottom:6px}
+.mascotSvg{width:56px;height:56px;flex-shrink:0}
+.bubble{background:#fff;border:3px solid var(--apricot-soft);border-radius:8px 16px 16px 16px;padding:7px 40px 7px 14px;position:relative;display:flex;flex-direction:column;gap:1px}
+.ben{font-size:22px;color:var(--ink)}
+.bko{font-size:17px;color:var(--ink-soft)}
+.bspk{position:absolute;right:6px;top:6px;background:var(--sky-soft);color:var(--sky);border-radius:50%;width:30px;height:30px;font-size:15px}
+.slothint{color:var(--ink-soft);font-size:22px}
+.moodrow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.moodbtn{background:#fff;border:3px solid var(--line);border-radius:20px;padding:12px 16px;font-size:56px;cursor:pointer;line-height:1}
+.moodbtn.sel{border-color:var(--sage);background:var(--sage-soft)}
+.moodlbl{font-size:20px;color:var(--ink-soft);margin-top:4px}
+.moodsay{min-height:64px;margin-top:8px;text-align:center}
+.toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(90px);background:var(--sage);color:#fff;padding:14px 28px;border-radius:99px;font-size:23px;opacity:0;transition:.3s;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.overlay{position:fixed;inset:0;background:rgba(90,70,50,.4);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
+.overlay.show{display:flex}
+.sheet{background:#fff;border-radius:24px;padding:28px;max-width:520px;width:100%}
+.sheet h3{font-size:24px;margin-bottom:8px}
+.sheet .desc{font-size:17px;color:var(--ink-soft)}
+.sheet input{width:100%;border:3px solid var(--line);border-radius:12px;padding:12px;font-family:inherit;font-size:18px;margin-top:12px}
+.sheet .srow{display:flex;gap:10px;margin-top:18px}
+.sheet .srow button{flex:1;border-radius:99px;padding:14px;font-size:20px}
+</style>
+</head>
+<body>
+<div id="fit"><div id="stage">
+  <div class="top">
+    <div class="brand">💬 영어 표현 여행</div>
+    <div class="top-r"><span class="who" id="who"></span><span class="seeds" id="seeds">씨앗 0</span><button class="spk" id="spk" onclick="toggleSpk()">🔊</button></div>
+  </div>
+  <div class="prog" id="prog"></div>
+  <main id="main"></main>
+</div></div>
+<div class="toast" id="toast"></div>
+<div class="overlay" id="overlay">
+  <div class="sheet">
+    <h3>⚙️ 선생님 설정</h3>
+    <p class="desc">시트 사본을 만들고 [🌱 영어 표현 → 📲 앱 연결 안내]에서 받은 주소(/exec)를 붙여넣으면, 우리 반 이름과 녹음·돌아보기가 저장돼요.</p>
+    <input id="gasInput" placeholder="https://script.google.com/macros/s/.../exec">
+    <div class="srow"><button class="btn soft" onclick="closeSettings()">닫기</button><button class="btn" onclick="saveSettings()">🔗 연결하기</button></div>
+    <div id="linkArea" style="display:none;margin-top:16px">
+      <p class="desc">학생용 입장 주소 — 학생들에게 공유하세요. 학생은 ⚙️ 없이 이름만 골라 입장해요.</p>
+      <input id="linkOut" readonly>
+      <button class="btn sky" style="width:100%;margin-top:10px" onclick="copyLink()">📋 학생용 주소 복사</button>
+    </div>
+    <p class="desc" style="margin-top:14px;text-align:center">개발자 · 김수경</p>
+  </div>
+</div>
+<script>
+/* ===== 교육부 3학년 의사소통 기능 (교과서 1~10과) ===== */
+const PAT={
+ "인사·안부":{fn:"안부 묻고 답하기",fixed:[["How are you?","어떻게 지내?"],["I'm fine.","잘 지내."],["Thank you.","고마워."],["See you.","또 봐."]]},
+ "어디에 있어":{fn:"위치 말하기",q:"Where is it?",frame:"It's on the ___.",koframe:"___ 위에 있어.",slots:[["desk","책상"],["bed","침대"],["chair","의자"],["box","상자"]]},
+ "가족 소개":{fn:"가족 소개하기",frame:"He is my ___.",koframe:"그는 내 ___야.",slots:[["father","아빠"],["brother","형"],["grandfather","할아버지"]]},
+ "몇 시":{fn:"시각 묻고 답하기",q:"What time is it?",frame:"It's ___ o'clock.",koframe:"___시야.",slots:[["seven","일곱"],["eight","여덟"],["nine","아홉"],["ten","열"]]},
+ "원하는 것":{fn:"원하는 것 말하기",frame:"I want ___.",koframe:"나는 ___ 원해.",slots:[["water","물을"],["milk","우유를"],["bread","빵을"]]},
+ "제안":{fn:"제안하기",frame:"Let's ___.",koframe:"우리 ___ 하자.",slots:[["play","놀이"],["study","공부"],["sing","노래"]]},
+ "하는 일":{fn:"하는 일 말하기",q:"What are you doing?",frame:"I'm ___.",koframe:"나는 ___ 중이야.",slots:[["reading","읽는"],["eating","먹는"],["playing","노는"]]}
+};
+const UNITS=Object.keys(PAT);
+const STEPS=["이름","기분","미션","표현 만나기","문장 조립소","녹음하기","공책 시간","돌아보기","오늘의 성장"];
+const S={step:0,name:"",unit:UNITS[0],met:{},seeds:0,star:0,reason:"",pidx:0,widx:0,mood:""};
+let GAS_URL=lsGet("p4_gas")||"";
+let isStudent=false;
+(function(){var m=(location.hash||"").match(/[#&]c=([^&]+)/);if(m){GAS_URL=decodeURIComponent(m[1]);isStudent=true;}})();
+function entryLink(){return location.origin+location.pathname+"#c="+encodeURIComponent(GAS_URL);}
+function copyLink(){try{navigator.clipboard.writeText(entryLink());}catch(e){}toast("학생용 주소를 복사했어요");}
+const GAS_FALLBACK="";
+const _mem={};
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return _mem[k]||null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
+const $=s=>document.querySelector(s);
+function uinfo(){return PAT[S.unit];}
+function items(){const u=PAT[S.unit];if(u.fixed)return u.fixed.map(p=>({say:p[0],ko:p[1]}));return u.slots.map(s=>({say:u.frame.replace("___",s[0]),ko:u.koframe.replace("___",s[1])}));}
+function cur(){return items()[S.pidx]||items()[0];}
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800);}
+function grow(n,m){S.seeds+=n;$("#seeds").textContent="씨앗 "+S.seeds;if(m)toast(m);}
+function celebrate(){var ico=["⭐","💖","🌸","🌟","🎉","💛"];for(var i=0;i<18;i++){(function(j){var s=document.createElement("span");s.className="burst";s.textContent=ico[j%ico.length];s.style.left=(8+Math.random()*84)+"%";s.style.top=(18+Math.random()*44)+"%";s.style.animationDelay=(Math.random()*0.35)+"s";document.body.appendChild(s);setTimeout(function(){s.remove();},1700);})(i);}}
+/* 음성 */
+let VOICES=[],enVoice=null;
+function loadVoices(){VOICES=speechSynthesis.getVoices();enVoice=VOICES.find(v=>/en[-_]US/i.test(v.lang)&&/Google|Natural|Samantha|Aria/i.test(v.name))||VOICES.find(v=>/en[-_]US/i.test(v.lang))||VOICES.find(v=>/^en/i.test(v.lang))||null;}
+if('speechSynthesis' in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;setInterval(()=>{if(speechSynthesis.paused)speechSynthesis.resume();},4000);}
+function speakText(t){if(!('speechSynthesis' in window))return;try{speechSynthesis.cancel();setTimeout(()=>{const u=new SpeechSynthesisUtterance(t);u.lang="en-US";u.rate=.85;if(!enVoice)loadVoices();if(enVoice)u.voice=enVoice;speechSynthesis.speak(u);setTimeout(()=>{if(speechSynthesis.paused)speechSynthesis.resume();},200);},70);}catch(e){}}
+let speakerOn=true;
+function toggleSpk(){speakerOn=!speakerOn;var b=$("#spk");if(b)b.textContent=speakerOn?"🔊":"🔇";if(!speakerOn&&"speechSynthesis" in window)speechSynthesis.cancel();}
+function autoSpeak(t){if(speakerOn)speakText(t);}
+function speakCur(){speakText(cur().say);}
+/* GAS */
+async function gas(action,payload){if(!GAS_URL)return null;try{const r=await fetch(GAS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(Object.assign({action},payload||{}))});const j=await r.json();return j.success?j.data:null;}catch(e){return null;}}
+function gasRead(action,payload){
+  return new Promise(function(resolve){
+    if(!GAS_URL){resolve(null);return;}
+    var nm="__jp_"+Date.now()+"_"+Math.floor(Math.random()*99999);
+    var p=payload?("&p="+encodeURIComponent(JSON.stringify(payload))):"";
+    var url=GAS_URL+(GAS_URL.indexOf("?")>-1?"&":"?")+"action="+encodeURIComponent(action)+p+"&callback="+nm;
+    var sc=document.createElement("script");var done=false;
+    function clean(){try{delete window[nm];}catch(e){window[nm]=undefined;}if(sc&&sc.parentNode)sc.parentNode.removeChild(sc);}
+    window[nm]=function(j){if(done)return;done=true;clean();resolve(j&&j.success?j.data:null);};
+    sc.onerror=function(){if(done)return;done=true;clean();resolve(null);};
+    sc.src=url;document.head.appendChild(sc);
+    setTimeout(function(){if(!done){done=true;clean();resolve(null);}},12000);
+  });
+}
+function nowStr(){return new Date().toLocaleString('ko-KR');}
+/* ===== 진행/이동 ===== */
+function renderProg(){$("#prog").innerHTML=STEPS.map((_,i)=>`<div class="dot ${i<S.step?'on':''} ${i===S.step?'cur':''}"></div>`).join("");}
+function setStep(n){S.step=Math.max(0,Math.min(STEPS.length-1,n));S.pidx=0;renderProg();render();}
+function go(d){setStep(S.step+d);}
+function render(){$("#who").textContent=S.name?("👦 "+S.name):"";renderProg();const m=$("#main");[stStart,stMood,stMission,stMeet,stBuild,stRecord,stWrite,stReflect,stSummary][S.step](m);showBuddy();}
+/* 0) 이름 */
+async function stStart(m){
+  m.innerHTML=`<div class="h1">Hello! 💬</div><div class="sub">오늘 영어 표현 여행을 함께 떠나요.</div>
+  <div class="center">
+    <div style="font-size:40px">이름을 골라 주세요 🙂</div>
+    <select class="select" id="nameSel"><option value="">— 이름 선택 —</option></select>
+    <div class="recnote">이름을 골라 주세요.</div>
+    <button class="btn" onclick="startGo()" style="font-size:31px;padding:16px 40px">시작하기 ▶</button>
+    ${isStudent?"":'<button class="btn soft" onclick="openSettings()" style="font-size:21px;padding:11px 24px">⚙️ 선생님 설정</button>'}
+  </div>`;
+  const sel=$("#nameSel");let names=await gasRead("getNames");
+  if(!names||!names.length){names=[];for(let i=1;i<=30;i++)names.push("학생"+i);}
+  names.forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;sel.appendChild(o);});
+}
+let micReady=false;
+function requestMic(){if(micReady||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return;navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){micReady=true;st.getTracks().forEach(function(t){t.stop();});}).catch(function(){});}
+function startGo(){const sel=$("#nameSel");if(!sel||!sel.value){toast("이름을 골라 주세요");return;}S.name=sel.value;requestMic();go(1);}
+const MASCOT='<svg viewBox="0 0 100 100" class="mascotSvg"><path d="M50 24 C50 10 62 6 68 12 C68 22 56 26 50 26Z" fill="#7FB069"/><rect x="48" y="22" width="4" height="12" fill="#7FB069"/><circle cx="50" cy="62" r="32" fill="#FCE08A"/><circle cx="36" cy="68" r="5" fill="#F6B9A0" opacity=".7"/><circle cx="64" cy="68" r="5" fill="#F6B9A0" opacity=".7"/><circle cx="42" cy="58" r="5" fill="#5A4632"/><circle cx="58" cy="58" r="5" fill="#5A4632"/><circle cx="43.6" cy="56.5" r="1.6" fill="#fff"/><circle cx="59.6" cy="56.5" r="1.6" fill="#fff"/><path d="M44 70 Q50 76 56 70" stroke="#5A4632" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>';
+const BUDDY=[
+ {en:"Hi! Let's learn together!",ko:"안녕! 나랑 같이 배워 보자!"},
+ {en:"How are you today?",ko:"오늘 기분이 어때?"},
+ {en:"Let's learn fun phrases!",ko:"재미있는 표현을 배워 보자!"},
+ {en:"Listen and say it with me!",ko:"듣고 나랑 같이 말해 보자!"},
+ {en:"Let's build a sentence!",ko:"문장을 만들어 보자!"},
+ {en:"Record your voice!",ko:"네 목소리를 녹음해 봐!"},
+ {en:"Let's write it down!",ko:"공책에 또박또박 써 보자!"},
+ {en:"How was it today?",ko:"오늘 어땠어?"},
+ {en:"Great job! You did it!",ko:"정말 잘했어! 네가 해냈어!"}
+];
+let lastBuddyStep=-1;
+function showBuddy(){
+  var b=BUDDY[S.step];if(!b)return;
+  var main=$("#main");var div=document.createElement("div");div.className="buddy";
+  div.innerHTML='<div class="mascot">'+MASCOT+'</div><div class="bubble"><div class="ben en">'+b.en+'</div><div class="bko">'+b.ko+'</div><button class="bspk" onclick="speakText(\''+b.en.replace(/'/g,"\\'")+'\')">🔊</button></div>';
+  main.insertBefore(div,main.firstChild);
+  if(lastBuddyStep!==S.step){lastBuddyStep=S.step;if([0,1,2,4,7,8].indexOf(S.step)>=0)autoSpeak(b.en);}
+}
+const MOODS=[{en:"happy",ko:"기뻐요",e:"😊"},{en:"sad",ko:"슬퍼요",e:"😢"},{en:"angry",ko:"화나요",e:"😠"},{en:"hungry",ko:"배고파요",e:"😋"},{en:"tired",ko:"피곤해요",e:"😫"}];
+function stMood(m){
+  var md=MOODS.find(function(x){return x.en===S.mood;});
+  m.innerHTML='<div class="sbody"><div class="goal">😊 친구가 묻고 있어요. 지금 내 마음을 골라 영어로도 말해 볼까요?</div>'+
+  '<div class="center"><div class="moodrow">'+MOODS.map(function(x){return '<button class="moodbtn '+(S.mood===x.en?"sel":"")+'" onclick="pickMood(\''+x.en+'\')">'+x.e+'<div class="moodlbl">'+x.ko+'</div></button>';}).join("")+'</div>'+
+  '<div class="moodsay">'+(md?'<div class="ex en" style="font-size:44px">I\'m '+md.en+'.</div><div class="exko">'+md.e+' '+md.ko+'</div>':'')+'</div>'+
+  '</div></div><div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><button class="btn" onclick="go(1)">다음 ▶</button></div>';
+}
+function pickMood(en){S.mood=en;render();autoSpeak("I'm "+en+".");}
+/* 1) 미션 */
+function stMission(m){
+  m.innerHTML=`<div class="sbody"><div class="h1">Let's Learn 🧭</div>
+  <div class="goal">🎯 오늘은 친구와 주고받는 영어 표현을 만나고, 듣고 따라 말해요.</div>
+  <div class="sub">어떤 표현을 배워 볼까요?</div>
+  <div class="unitgrid">${UNITS.map(u=>`<button class="unit ${u===S.unit?'sel':''}" onclick="pickUnit('${u}')">${u}</button>`).join("")}</div>
+  <div class="goal">🤔 이 표현으로 친구에게 무엇을 물어보고 싶나요?</div></div>
+  <div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><button class="btn" onclick="go(1)">표현 만나러 가기 ▶</button></div>`;
+}
+function pickUnit(u){S.unit=u;render();}
+/* 2) 표현 만나기 (carousel) */
+function stMeet(m){
+  S.pidx=S.pidx||0;
+  m.innerHTML=`<div class="sbody"><div class="h1">Listen & Say — ${S.unit}</div>
+  <div class="goal">🔎 듣고 입으로 따라 말해 봐요.</div>
+  <div class="center">
+    <div class="big" id="meetCard"></div>
+    <div class="wnav"><button class="warrow" onclick="pStep(-1)">◀</button><button class="btn sky" onclick="speakCur()">🔊 듣기</button><button class="warrow" onclick="pStep(1)">▶</button></div>
+    <div class="count" id="cnt"></div>
+  </div></div>
+  <div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><button class="btn" onclick="go(1)">다음 단계 ▶</button></div>`;
+  meetShow();
+}
+function meetShow(){const p=cur();const u=uinfo();$("#meetCard").innerHTML=`<div class="fn">${u.fn}${u.q?" · "+u.q:""}</div>${u.frame?`<div class="frame en">${u.frame}</div>`:""}<div class="ex en">${p.say}</div><div class="exko">${p.ko}</div>`;const c=$("#cnt");if(c)c.textContent=`${S.pidx+1} / ${items().length}`;autoSpeak(p.say);}
+function pStep(d){const n=items().length;S.pidx=(S.pidx+d+n)%n;meetShow();}
+/* 3) 문장 조립소 (칩) */
+let bankToks=[],placedOrder=[];
+function stBuild(m){
+  S.pidx=S.pidx||0;
+  m.innerHTML=`<div class="sbody"><div class="h1">Sentence Builder 🧩</div>
+  <div class="goal">뜻에 맞게 말 조각을 순서대로 놓아 문장을 만들어요. 틀려도 괜찮아요, 다시 해 봐요.</div>
+  <div class="center"><div class="bcard" id="bcard"></div>
+    <div class="wnav"><button class="warrow" onclick="bStep(-1)">◀</button><span class="count" id="cnt"></span><button class="warrow" onclick="bStep(1)">▶</button></div>
+  </div></div>
+  <div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><button class="btn" onclick="go(1)">다음 단계 ▶</button></div>`;
+  buildShow();
+}
+function buildShow(){
+  const p=cur();placedOrder=[];
+  bankToks=p.say.split(" ").map((w,i)=>({w,i})).sort(()=>Math.random()-.5);
+  renderBuild();
+  const c=$("#cnt");if(c)c.textContent=`${S.pidx+1} / ${items().length}`;
+}
+function renderBuild(){
+  const p=cur();const ps={};placedOrder.forEach(i=>ps[i]=1);
+  const slot=placedOrder.map(i=>{const t=bankToks.find(x=>x.i===i);return `<button class="chip placed" onclick="unplace(${i})">${t.w}</button>`;}).join("");
+  const bank=bankToks.filter(t=>!ps[t.i]).map(t=>`<button class="chip" onclick="place(${t.i})">${t.w}</button>`).join("");
+  $("#bcard").innerHTML=`<div class="prompt">"${p.ko}" 를 영어로 만들어요</div>
+    <div class="slot" id="slot">${slot||'<span class="slothint">조각을 눌러 여기에 놓아요</span>'}</div>
+    <div class="bank">${bank}</div>
+    <div style="text-align:center;margin-top:14px"><button class="btn" onclick="checkBuild()">✓ 다 놓았어요</button></div>
+    <div class="result" id="bres"></div>`;
+}
+function place(i){placedOrder.push(i);renderBuild();}
+function unplace(i){placedOrder=placedOrder.filter(x=>x!==i);renderBuild();}
+function checkBuild(){const p=cur();const made=placedOrder.map(i=>bankToks.find(x=>x.i===i).w).join(" ");const r=$("#bres");if(made===p.say){r.className="result good";r.textContent="🌱 딱 맞았어요! "+p.say;speakText(p.say);}else{r.className="result again";r.textContent="조금만 더! 순서를 다시 볼까요?";}}
+function bStep(d){const n=items().length;S.pidx=(S.pidx+d+n)%n;buildShow();}
+/* 4) 녹음 */
+let mediaRec=null,chunks=[],recing=false;
+function stRecord(m){
+  S.pidx=S.pidx||0;
+  m.innerHTML=`<div class="sbody"><div class="h1">Record It 🎙️</div>
+  <div class="goal">듣고 큰 소리로 따라 말한 뒤, 단추를 눌러 내 목소리를 녹음해요.</div>
+  <div class="center">
+    <div class="big" id="recCard"></div>
+    <div class="wnav">
+      <button class="btn sky" onclick="speakCur()">🔊 듣기</button>
+      <button class="btn" id="recBtn" onclick="toggleRec()" style="background:var(--amber)">🎙️ 녹음하기</button>
+      <button class="btn soft" onclick="pStep2(1)">다음 표현 ▶</button>
+    </div>
+    <div class="recnote" id="recNote">🎙️ 녹음하기를 누르면 시작, 다시 누르면 멈추고 저장돼요.</div>
+    <input class="kbd" id="recKbd" placeholder="말한 표현을 글로도 적어 보세요 (선택)">
+  </div></div>
+  <div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><button class="btn" onclick="go(1)">다음 단계 ▶</button></div>`;
+  recShow();
+}
+function recShow(){const p=cur();const u=uinfo();$("#recCard").innerHTML=`<div class="fn">${u.fn}</div><div class="ex en">${p.say}</div><div class="exko">${p.ko}</div>`;autoSpeak(p.say);}
+function pStep2(d){const n=items().length;S.pidx=(S.pidx+d+n)%n;recShow();}
+async function toggleRec(){
+  const btn=$("#recBtn"),note=$("#recNote");
+  if(recing){mediaRec&&mediaRec.stop();return;}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){note.textContent="이 기기에서는 녹음을 쓸 수 없어요. 글로 적어 제출해요.";return;}
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    mediaRec=new MediaRecorder(stream);chunks=[];
+    mediaRec.ondataavailable=e=>chunks.push(e.data);
+    mediaRec.onstop=async()=>{recing=false;btn.classList.remove("rec");note.textContent="저장 중이에요…";
+      const blob=new Blob(chunks,{type:"audio/webm"});const dataUrl=await blobToDataUrl(blob);
+      const p=cur();const fn=S.name+"_"+p.say.replace(/[^a-zA-Z]/g,"").slice(0,12)+"_"+Date.now()+".webm";
+      let url="";if(GAS_URL){url=await gas("uploadAudio",{dataUrl,filename:fn})||"";}
+      await gas("saveRecord",{data:{날짜:nowStr(),이름:S.name,활동:"따라 말하고 녹음",단원:S.unit,음성텍스트:($("#recKbd")&&$("#recKbd").value.trim())||p.say,음성파일URL:url}});
+      toast("잘 따라 말했어요 🌱");note.textContent=url?"녹음을 선생님 시트에 저장했어요 🎵":(GAS_URL?"저장했어요.":"연결 전이라 이 기기에만 기록돼요. 잘했어요 🌱");
+      stream.getTracks().forEach(t=>t.stop());};
+    mediaRec.start();recing=true;btn.classList.add("rec");note.textContent="녹음 중… 다시 누르면 멈춰요.";
+  }catch(e){note.textContent="마이크를 쓸 수 없어요. 글로 적어 제출해요.";}
+}
+function blobToDataUrl(b){return new Promise(r=>{const fr=new FileReader();fr.onload=()=>r(fr.result);fr.readAsDataURL(b);});}
+/* 5) 공책 시간 (표현 쓰기 -> 꽃 피우기) */
+const FLOWER_POS=[[16,60],[30,48],[44,58],[58,46],[72,56],[86,60],[24,72],[52,70],[80,72],[38,74],[66,74],[50,84]];
+function stWrite(m){
+  if(S.widx==null||S.widx>=items().length)S.widx=0;
+  m.innerHTML=`<div class="sbody"><div class="goal">✏️ 표현을 공책에 또박또박 쓰고 [다 썼어요]를 누르면, 꽃밭에 꽃이 펴요.</div>
+  <div class="treewrap"><div class="garden"><svg class="gardenSvg" viewBox="0 0 200 120"><ellipse cx="100" cy="112" rx="96" ry="20" fill="#7FB069"/><ellipse cx="100" cy="104" rx="96" ry="16" fill="#8FBF7A"/></svg><div class="flowers" id="flowers"></div></div>
+  <div class="gcount" id="gcount"></div></div>
+  <div class="writecard" id="writeCard"></div>
+  <div class="writebtns"><button class="btn sky" onclick="speakText(items()[S.widx].say)">🔊 듣기</button><button class="btn" onclick="writeDone()">✏️ 다 썼어요</button></div>
+  </div><div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><button class="btn" onclick="go(1)">돌아보기 ▶</button></div>`;
+  drawFlowers(false);writeShow();
+}
+function writeShow(){const p=items()[S.widx];const done=S.met[S.unit+"|"+S.widx];$("#writeCard").innerHTML=`<div class="ex en">${p.say}</div><div class="exko">${p.ko}</div>${done?'<div class="wdone">✓ 썼어요</div>':''}`;autoSpeak(p.say);}
+function drawFlowers(animateLast){
+  const keys=Object.keys(S.met).filter(k=>k.startsWith(S.unit+"|"));const box=$("#flowers");if(!box)return;
+  box.innerHTML=keys.map((k,i)=>{const pp=FLOWER_POS[i%FLOWER_POS.length];const last=animateLast&&i===keys.length-1;return `<span class="flower ${last?'pop':''}" style="left:${pp[0]}%;top:${pp[1]}%">🌸</span>`;}).join("");
+  const c=$("#gcount");if(c)c.textContent=keys.length?`꽃 ${keys.length}송이가 피었어요!`:`표현을 쓰면 꽃이 펴요.`;
+}
+function writeDone(){const k=S.unit+"|"+S.widx;if(!S.met[k]){S.met[k]=1;grow(1);drawFlowers(true);}const n=items().length;if(S.widx<n-1){S.widx++;writeShow();}else{writeShow();toast("다 썼어요! 꽃밭이 활짝 🌸");}}
+/* 6) 돌아보기 */
+function stReflect(m){
+  m.innerHTML=`<div class="sbody"><div class="h1">My Diary 🍀</div>
+  <div class="goal">오늘 표현 여행, 어땠어요? 정답은 없어요.</div>
+  <div class="center">
+    <div style="font-size:25px">오늘 내 마음에 별을 달아요</div>
+    <div class="stars" id="stars">${[1,2,3,4,5].map(i=>`<span class="star ${i<=S.star?'on':''}" onclick="setStar(${i})">★</span>`).join("")}</div>
+    <div class="qbox"><p>오늘 배운 표현은 언제 쓰면 좋을까요?</p><textarea id="reason" placeholder="예: 친구를 처음 만났을 때 Hello! 라고 해요">${S.reason}</textarea></div>
+    <button class="btn" onclick="saveReflect()">🌱 돌아보기 저장하기</button>
+  </div></div>
+  <div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><span></span></div>`;
+}
+function setStar(n){S.star=n;render();}
+async function saveReflect(){
+  S.reason=($("#reason")&&$("#reason").value.trim())||"";
+  if(!S.star&&!S.reason){toast("별 하나, 또는 한 줄을 남겨 볼까요?");return;}
+  await gas("saveRecord",{data:{날짜:nowStr(),이름:S.name,활동:"돌아보기",단원:S.unit,별점:S.star,한줄이유:S.reason,모은낱말:Object.keys(S.met).length}});
+  toast("오늘의 돌아보기를 남겼어요 🌱");go(1);
+}
+/* 7) 성장 */
+function stSummary(m){
+  const got=Object.keys(S.met).length;celebrate();
+  m.innerHTML=`<div class="sbody"><div class="h1">Well Done! 🌸</div>
+  <div class="center">
+    <div class="treebig">${S.seeds?'🌷'+'🌸'.repeat(Math.min(S.seeds,8)):'🌱'}</div>
+    <div class="tree">${S.name}님, 오늘 <b>씨앗 ${S.seeds}개</b>를 모았어요!<br>공책에 쓴 표현마다 꽃이 한 송이씩 피었어요 🌸</div>
+    <div class="goal" style="max-width:700px">오늘 익힌 표현으로 친구에게 말을 걸어 볼까요? 내일 또 만나요.</div>
+    <button class="btn" onclick="setStep(0)">처음으로 (다른 친구) ▶</button>
+  </div></div>
+  <div class="nav"><button class="btn soft" onclick="go(-1)">◀ 이전</button><span></span></div>`;
+}
+/* 설정 */
+function openSettings(){$("#gasInput").value=GAS_URL;if(GAS_URL){$("#linkArea").style.display="block";$("#linkOut").value=entryLink();}$("#overlay").classList.add("show");}
+function closeSettings(){$("#overlay").classList.remove("show");}
+function saveSettings(){GAS_URL=$("#gasInput").value.trim();lsSet("p4_gas",GAS_URL);if(GAS_URL){$("#linkArea").style.display="block";$("#linkOut").value=entryLink();}toast(GAS_URL?"연결했어요. 이름을 다시 불러와요.":"연결을 비웠어요");if(S.step===0)render();}
+renderProg();render();
+</script>
+<script>
+(function(){
+  function isDemo(){ try{ if(/[#&]c=/.test(location.hash||'')) return false; for(var j=0;j<localStorage.length;j++){ var k=localStorage.key(j)||''; if(/exec|gas|serverurl|sheet_api|endpoint/i.test(k) && localStorage.getItem(k)) return false; } return true; }catch(e){ return true; } }
+  function show(){ if(document.getElementById('__demoBar'))return; if(!isDemo())return; var bar=document.createElement('div'); bar.id='__demoBar'; bar.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:2147483000;background:#1f2937;color:#fff;font-size:13px;line-height:1.45;padding:9px 38px calc(9px + env(safe-area-inset-bottom)) 14px;text-align:center;font-family:sans-serif;box-shadow:0 -2px 10px rgba(0,0,0,0.25);'; bar.innerHTML='체험 모드예요 · 활동 기록은 이 기기에만 저장돼요(이어하기 가능). 선생님이 구글 시트를 연결하면 시트에 저장됩니다.'; var x=document.createElement('button'); x.type='button'; x.setAttribute('aria-label','닫기'); x.textContent='✕'; x.style.cssText='position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:#fff;font-size:16px;line-height:1;cursor:pointer;padding:6px;'; x.onclick=function(){ try{bar.remove();}catch(e){bar.style.display='none';} }; bar.appendChild(x); document.body.appendChild(bar); }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', show); } else { show(); }
+})();
+</script>
+</body>
+</html>
