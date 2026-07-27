@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>4학년 영어 표현 여행 💬</title>
+<title>영어 표현 여행 💬</title>
 <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--cream:#FFF9F0;--card:#fff;--apricot:#F6B17A;--apricot-soft:#FFE9D6;--sage:#7FB069;--sage-soft:#E6F0DD;--sky:#8FC1DA;--sky-soft:#E2F0F6;--amber:#E8A33D;--ink:#5A4632;--ink-soft:#9A8A77;--line:#F0E4D4;}
@@ -140,7 +140,17 @@ main{flex:1;overflow:hidden;padding:16px 34px;display:flex;flex-direction:column
 </div>
 <script>
 /* ===== 교육부 3학년 의사소통 기능 (교과서 1~10과) ===== */
-const PAT={
+const PAT_G3={
+ "인사·소개":{fn:"인사하고 소개하기",fixed:[["Hello.","안녕."],["Hi.","안녕."],["My name is Hana.","내 이름은 하나야."],["Thank you.","고마워."],["Goodbye.","잘 가."]]},
+ "무엇인지":{fn:"무엇인지 말하기",q:"What's this?",frame:"It's a ___.",koframe:"그것은 ___이야.",slots:[["ball","공"],["car","자동차"],["doll","인형"],["cup","컵"],["clock","시계"],["bag","가방"]]},
+ "좋아하는 것":{fn:"좋아하는 것 말하기",q:"Do you like ___?",frame:"I like ___.",koframe:"나는 ___ 좋아해.",slots:[["apples","사과"],["bananas","바나나"],["oranges","오렌지"],["pizza","피자"]]},
+ "할 수 있는 것":{fn:"할 수 있는 것 말하기",q:"Can you ___?",frame:"I can ___.",koframe:"나는 ___ 할 수 있어.",slots:[["jump","점프"],["swim","수영"],["run","달리기"],["dance","춤"],["fly","날기"]]},
+ "가진 것":{fn:"가진 것 말하기",q:"Do you have a ___?",frame:"I have a ___.",koframe:"나는 ___ 있어.",slots:[["pencil","연필"],["ruler","자"],["eraser","지우개"],["notebook","공책"]]},
+ "감정":{fn:"감정 말하기",frame:"I'm ___.",koframe:"나는 ___.",slots:[["happy","기뻐"],["sad","슬퍼"],["angry","화나"],["hungry","배고파"],["tired","피곤해"]]},
+ "색깔":{fn:"색깔 말하기",q:"What color is it?",frame:"It's ___.",koframe:"그것은 ___이야.",slots:[["red","빨간색"],["blue","파란색"],["yellow","노란색"],["green","초록색"],["pink","분홍색"]]},
+ "날씨":{fn:"날씨 말하기",q:"How's the weather?",frame:"It's ___.",koframe:"___.",slots:[["sunny","화창해"],["cloudy","흐려"],["raining","비가 와"],["snowing","눈이 와"],["windy","바람 불어"]]}
+};
+const PAT_G4={
  "인사·안부":{fn:"안부 묻고 답하기",fixed:[["How are you?","어떻게 지내?"],["I'm fine.","잘 지내."],["Thank you.","고마워."],["See you.","또 봐."]]},
  "어디에 있어":{fn:"위치 말하기",q:"Where is it?",frame:"It's on the ___.",koframe:"___ 위에 있어.",slots:[["desk","책상"],["bed","침대"],["chair","의자"],["box","상자"]]},
  "가족 소개":{fn:"가족 소개하기",frame:"He is my ___.",koframe:"그는 내 ___야.",slots:[["father","아빠"],["brother","형"],["grandfather","할아버지"]]},
@@ -149,10 +159,22 @@ const PAT={
  "제안":{fn:"제안하기",frame:"Let's ___.",koframe:"우리 ___ 하자.",slots:[["play","놀이"],["study","공부"],["sing","노래"]]},
  "하는 일":{fn:"하는 일 말하기",q:"What are you doing?",frame:"I'm ___.",koframe:"나는 ___ 중이야.",slots:[["reading","읽는"],["eating","먹는"],["playing","노는"]]}
 };
-const UNITS=Object.keys(PAT);
+// 학년에 따라 표현 묶음을 고른다. (기본 3학년)
+var GRADE = 3;
+try { var _sg = localStorage.getItem('pattern_grade'); if(_sg) GRADE = Number(_sg)||3; } catch(e){}
+var PAT = (GRADE===4) ? PAT_G4 : PAT_G3;
+function setGrade(g){
+  GRADE = (Number(g)===4)?4:3;
+  try{ localStorage.setItem('pattern_grade', String(GRADE)); }catch(e){}
+  PAT = (GRADE===4) ? PAT_G4 : PAT_G3;
+  UNITS = Object.keys(PAT);
+  S.unit = UNITS[0]; S.pidx=0; S.met={};
+  render();
+}
+var UNITS=Object.keys(PAT);
 const STEPS=["이름","기분","미션","표현 만나기","문장 조립소","녹음하기","공책 시간","돌아보기","오늘의 성장"];
 const S={step:0,name:"",unit:UNITS[0],met:{},seeds:0,star:0,reason:"",pidx:0,widx:0,mood:""};
-let GAS_URL=lsGet("p4_gas")||"";
+let GAS_URL=lsGet("p3_gas")||"";
 let isStudent=false;
 (function(){var m=(location.hash||"").match(/[#&]c=([^&]+)/);if(m){GAS_URL=decodeURIComponent(m[1]);isStudent=true;}})();
 function entryLink(){return location.origin+location.pathname+"#c="+encodeURIComponent(GAS_URL);}
@@ -179,19 +201,18 @@ function autoSpeak(t){if(speakerOn)speakText(t);}
 function speakCur(){speakText(cur().say);}
 /* GAS */
 async function gas(action,payload){if(!GAS_URL)return null;try{const r=await fetch(GAS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(Object.assign({action},payload||{}))});const j=await r.json();return j.success?j.data:null;}catch(e){return null;}}
-function gasRead(action,payload){
-  return new Promise(function(resolve){
-    if(!GAS_URL){resolve(null);return;}
-    var nm="__jp_"+Date.now()+"_"+Math.floor(Math.random()*99999);
-    var p=payload?("&p="+encodeURIComponent(JSON.stringify(payload))):"";
-    var url=GAS_URL+(GAS_URL.indexOf("?")>-1?"&":"?")+"action="+encodeURIComponent(action)+p+"&callback="+nm;
-    var sc=document.createElement("script");var done=false;
-    function clean(){try{delete window[nm];}catch(e){window[nm]=undefined;}if(sc&&sc.parentNode)sc.parentNode.removeChild(sc);}
-    window[nm]=function(j){if(done)return;done=true;clean();resolve(j&&j.success?j.data:null);};
-    sc.onerror=function(){if(done)return;done=true;clean();resolve(null);};
-    sc.src=url;document.head.appendChild(sc);
-    setTimeout(function(){if(!done){done=true;clean();resolve(null);}},12000);
-  });
+// 기록을 저장하고, 연결된 상태에서 실패하면 학생에게 분명히 알린다.
+async function saveRecordSafe(payload){
+  if(!GAS_URL){ return false; }
+  try{
+    const r=await fetch(GAS_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(Object.assign({action:"saveRecord"},payload||{}))});
+    const j=await r.json();
+    if(j&&j.success){ return true; }
+    throw new Error("save fail");
+  }catch(e){
+    toast("기록을 저장하지 못했어요. 인터넷 연결을 확인하고 다시 해 주세요.");
+    return false;
+  }
 }
 function nowStr(){return new Date().toLocaleString('ko-KR');}
 /* ===== 진행/이동 ===== */
@@ -203,14 +224,27 @@ function render(){$("#who").textContent=S.name?("👦 "+S.name):"";renderProg();
 async function stStart(m){
   m.innerHTML=`<div class="h1">Hello! 💬</div><div class="sub">오늘 영어 표현 여행을 함께 떠나요.</div>
   <div class="center">
+    <div style="font-size:36px;margin-bottom:6px">학년을 골라요 🎒</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-bottom:10px">
+      <button class="btn ${GRADE===3?'':'soft'}" style="font-size:24px;padding:12px 28px" onclick="setGrade(3)">3학년</button>
+      <button class="btn ${GRADE===4?'':'soft'}" style="font-size:24px;padding:12px 28px" onclick="setGrade(4)">4학년</button>
+    </div>
     <div style="font-size:40px">이름을 골라 주세요 🙂</div>
     <select class="select" id="nameSel"><option value="">— 이름 선택 —</option></select>
-    <div class="recnote">이름을 골라 주세요.</div>
+    <div class="recnote">${GRADE}학년으로 시작해요. 이름을 골라 주세요.</div>
     <button class="btn" onclick="startGo()" style="font-size:31px;padding:16px 40px">시작하기 ▶</button>
     ${isStudent?"":'<button class="btn soft" onclick="openSettings()" style="font-size:21px;padding:11px 24px">⚙️ 선생님 설정</button>'}
   </div>`;
-  const sel=$("#nameSel");let names=await gasRead("getNames");
-  if(!names||!names.length){names=[];for(let i=1;i<=30;i++)names.push("학생"+i);}
+  const sel=$("#nameSel");
+  let names = GAS_URL ? await gas("getNames") : null;
+  if(!names||!names.length){
+    if(isStudent){
+      sel.innerHTML='<option value="">명단을 불러오지 못했어요</option>';
+      toast("우리 반 명단을 불러오지 못했어요. 인터넷을 확인하고 새로고침해 주세요.");
+      return;
+    }
+    names=[];for(let i=1;i<=30;i++)names.push("학생"+i);
+  }
   names.forEach(n=>{const o=document.createElement("option");o.value=n;o.textContent=n;sel.appendChild(o);});
 }
 let micReady=false;
@@ -335,7 +369,7 @@ async function toggleRec(){
       const blob=new Blob(chunks,{type:"audio/webm"});const dataUrl=await blobToDataUrl(blob);
       const p=cur();const fn=S.name+"_"+p.say.replace(/[^a-zA-Z]/g,"").slice(0,12)+"_"+Date.now()+".webm";
       let url="";if(GAS_URL){url=await gas("uploadAudio",{dataUrl,filename:fn})||"";}
-      await gas("saveRecord",{data:{날짜:nowStr(),이름:S.name,활동:"따라 말하고 녹음",단원:S.unit,음성텍스트:($("#recKbd")&&$("#recKbd").value.trim())||p.say,음성파일URL:url}});
+      await saveRecordSafe({data:{날짜:nowStr(),이름:S.name,활동:"따라 말하고 녹음",학년:GRADE,단원:S.unit,음성텍스트:($("#recKbd")&&$("#recKbd").value.trim())||p.say,음성파일URL:url}});
       toast("잘 따라 말했어요 🌱");note.textContent=url?"녹음을 선생님 시트에 저장했어요 🎵":(GAS_URL?"저장했어요.":"연결 전이라 이 기기에만 기록돼요. 잘했어요 🌱");
       stream.getTracks().forEach(t=>t.stop());};
     mediaRec.start();recing=true;btn.classList.add("rec");note.textContent="녹음 중… 다시 누르면 멈춰요.";
@@ -377,7 +411,7 @@ function setStar(n){S.star=n;render();}
 async function saveReflect(){
   S.reason=($("#reason")&&$("#reason").value.trim())||"";
   if(!S.star&&!S.reason){toast("별 하나, 또는 한 줄을 남겨 볼까요?");return;}
-  await gas("saveRecord",{data:{날짜:nowStr(),이름:S.name,활동:"돌아보기",단원:S.unit,별점:S.star,한줄이유:S.reason,모은낱말:Object.keys(S.met).length}});
+  await saveRecordSafe({data:{날짜:nowStr(),이름:S.name,활동:"돌아보기",학년:GRADE,단원:S.unit,별점:S.star,한줄이유:S.reason,모은낱말:Object.keys(S.met).length}});
   toast("오늘의 돌아보기를 남겼어요 🌱");go(1);
 }
 /* 7) 성장 */
@@ -395,14 +429,48 @@ function stSummary(m){
 /* 설정 */
 function openSettings(){$("#gasInput").value=GAS_URL;if(GAS_URL){$("#linkArea").style.display="block";$("#linkOut").value=entryLink();}$("#overlay").classList.add("show");}
 function closeSettings(){$("#overlay").classList.remove("show");}
-function saveSettings(){GAS_URL=$("#gasInput").value.trim();lsSet("p4_gas",GAS_URL);if(GAS_URL){$("#linkArea").style.display="block";$("#linkOut").value=entryLink();}toast(GAS_URL?"연결했어요. 이름을 다시 불러와요.":"연결을 비웠어요");if(S.step===0)render();}
+function saveSettings(){
+  var url=$("#gasInput").value.trim();
+  if(!url){ GAS_URL=""; lsSet("p3_gas",""); toast("연결을 비웠어요"); if(S.step===0)render(); return; }
+  if(!/^https:\/\/script\.google\.com\/.*\/exec/.test(url)){ toast("…/exec 로 끝나는 주소를 넣어 주세요."); return; }
+  toast("연결을 확인하는 중이에요...");
+  var prev=GAS_URL; GAS_URL=url;
+  gas("getNames").then(function(names){
+    if(!Array.isArray(names)){ GAS_URL=prev; toast("연결이 안 됐어요. 주소와 배포 권한(모든 사용자)을 확인해 주세요."); return; }
+    lsSet("p3_gas",url);
+    var bar=document.getElementById("__demoBar"); if(bar&&bar.parentNode) bar.parentNode.removeChild(bar);
+    $("#linkArea").style.display="block"; $("#linkOut").value=entryLink();
+    toast("연결했어요. 이름을 다시 불러와요.");
+    if(S.step===0)render();
+  });
+}
 renderProg();render();
 </script>
+
 <script>
-(function(){
-  function isDemo(){ try{ if(/[#&]c=/.test(location.hash||'')) return false; for(var j=0;j<localStorage.length;j++){ var k=localStorage.key(j)||''; if(/exec|gas|serverurl|sheet_api|endpoint/i.test(k) && localStorage.getItem(k)) return false; } return true; }catch(e){ return true; } }
-  function show(){ if(document.getElementById('__demoBar'))return; if(!isDemo())return; var bar=document.createElement('div'); bar.id='__demoBar'; bar.style.cssText='position:fixed;left:0;right:0;bottom:0;z-index:2147483000;background:#1f2937;color:#fff;font-size:13px;line-height:1.45;padding:9px 38px calc(9px + env(safe-area-inset-bottom)) 14px;text-align:center;font-family:sans-serif;box-shadow:0 -2px 10px rgba(0,0,0,0.25);'; bar.innerHTML='체험 모드예요 · 활동 기록은 이 기기에만 저장돼요(이어하기 가능). 선생님이 구글 시트를 연결하면 시트에 저장됩니다.'; var x=document.createElement('button'); x.type='button'; x.setAttribute('aria-label','닫기'); x.textContent='✕'; x.style.cssText='position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:#fff;font-size:16px;line-height:1;cursor:pointer;padding:6px;'; x.onclick=function(){ try{bar.remove();}catch(e){bar.style.display='none';} }; bar.appendChild(x); document.body.appendChild(bar); }
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', show); } else { show(); }
+(function () {
+  function isDemo() {
+    try {
+      if (/[#&]c=/.test(location.hash || '')) return false;
+      for (var j=0;j<localStorage.length;j++){ var k=localStorage.key(j)||''; if(/exec|gas|serverurl|sheet_api|endpoint/i.test(k) && localStorage.getItem(k)) return false; }
+      return true;
+    } catch (e) { return true; }
+  }
+  function show() {
+    if (document.getElementById('__demoBar')) return;
+    if (!isDemo()) return;
+    var bar = document.createElement('div');
+    bar.id = '__demoBar';
+    bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:2147483000;background:#1f2937;color:#fff;font-size:13px;line-height:1.45;padding:9px 38px calc(9px + env(safe-area-inset-bottom)) 14px;text-align:center;font-family:sans-serif;box-shadow:0 -2px 10px rgba(0,0,0,0.25);';
+    bar.textContent = '체험 모드예요 · 활동 기록은 이 기기에만 저장돼요. 선생님이 구글 시트를 연결하면 시트에 저장됩니다.';
+    var x = document.createElement('button');
+    x.type = 'button'; x.setAttribute('aria-label', '닫기'); x.textContent = '\u2715';
+    x.style.cssText = 'position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:0;color:#fff;font-size:16px;line-height:1;cursor:pointer;padding:6px;';
+    x.onclick = function () { try { bar.remove(); } catch (e) { bar.style.display = 'none'; } };
+    bar.appendChild(x);
+    document.body.appendChild(bar);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', show); } else { show(); }
 })();
 </script>
 </body>
